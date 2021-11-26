@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       // color: "orange",
     },
     "& h3": {
+      color: theme.palette.primary.main,
       marginTop: theme.spacing(3),
     },
   },
@@ -31,14 +32,14 @@ const About = (): ReactElement => {
         children continue to blossom under our guidance.
       </Typography>
       <Typography variant="h3">Vision</Typography>
-      <p>
+      <Typography variant="body1">
         Learning Curve Public School seeks to provide the best place for a child
         to learn, to grow and to evolve into a balanced and strong individual.
-      </p>
-      <p>
+      </Typography>
+      <Typography variant="body1">
         The School intends to strive to become a second home for your child. The
         School located Hinjewadi Pune.
-      </p>
+      </Typography>
     </div>
   );
 };
