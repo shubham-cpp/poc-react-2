@@ -1,8 +1,8 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 import AdmissionModel from '../model/admission';
 
 const router = Router();
-router.route('/').get(async (_, res: Response) => {
+router.route('/').get(async (_, res) => {
   try {
     const admissions = await AdmissionModel.find({}, { _id: 0 });
     res.status(200).json(admissions);
@@ -11,7 +11,7 @@ router.route('/').get(async (_, res: Response) => {
   }
 });
 
-router.route('/:id').get(async (req: Request, res: Response) => {
+router.route('/:id').get(async (req, res) => {
   const { id } = req.params;
   try {
     // console.log(id);
