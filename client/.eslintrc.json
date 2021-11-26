@@ -16,7 +16,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint", "jest"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "eqeqeq": "error",
