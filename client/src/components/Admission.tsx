@@ -10,6 +10,9 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { ReactElement, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../app/store";
+import { setAdmissionGrades } from "../features/Admission/admissionSlice";
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -45,41 +48,34 @@ function a11yProps(index: number) {
   };
 }
 
-interface option {
-  grade: string;
-  fees?: number;
-  seats: number;
-}
+// interface option {
+//   grade: string;
+//   fees?: number;
+//   seats: number;
+// }
 
-interface Grade {
-  category: string;
-  options: Array<option>;
-}
-
-// const useStyles = makeStyles((theme: Theme) => ({
-//   table: {
-//     display: "flex",
-//     "& div": {
-//       marginRight: theme.spacing(3),
-//     },
-//   },
-// }));
+// interface Grade {
+//   category: string;
+//   options: Array<option>;
+// }
 
 const Admission = (): ReactElement => {
   const [value, setValue] = useState(0);
-  const [grades, setGrades] = useState<Grade[]>([]);
-  // const classes = useStyles();
+  const grades = useSelector((state: RootState) => state.admission.value);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     axios
       .get("/admissions")
-      .then(({ data }) => setGrades(data))
+      .then(({ data }) => dispatch(setAdmissionGrades(data)))
       .catch((err) =>
         console.error("Error while fetching grades ", err.message)
       );
   }, []);
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) =>
     setValue(newValue);
-  };
+
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
