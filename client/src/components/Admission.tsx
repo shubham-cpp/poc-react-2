@@ -1,7 +1,117 @@
-import { ReactElement } from "react";
+import {
+  Box,
+  Tab,
+  Table,
+  TableCell,
+  TableContainer,
+  TableRow,
+  TableBody,
+  Tabs,
+} from "@mui/material";
+import axios from "axios";
+import { ReactElement, useEffect, useState } from "react";
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <TableContainer sx={{ p: 3, maxWidth: "20rem" }}>
+          <Table>
+            <TableBody>{children}</TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </div>
+  );
+}
+
+function a11yProps(index: number) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+
+interface option {
+  grade: string;
+  fees?: number;
+  seats: number;
+}
+
+interface Grade {
+  category: string;
+  options: Array<option>;
+}
+
+// const useStyles = makeStyles((theme: Theme) => ({
+//   table: {
+//     display: "flex",
+//     "& div": {
+//       marginRight: theme.spacing(3),
+//     },
+//   },
+// }));
 
 const Admission = (): ReactElement => {
-  return <h1>Admissions Details</h1>;
+  const [value, setValue] = useState(0);
+  const [grades, setGrades] = useState<Grade[]>([]);
+  // const classes = useStyles();
+  useEffect(() => {
+    axios
+      .get("/admissions")
+      .then(({ data }) => setGrades(data))
+      .catch((err) =>
+        console.error("Error while fetching grades ", err.message)
+      );
+  }, []);
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+  return (
+    <Box sx={{ width: "100%" }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
+          {grades &&
+            grades.map((grade, idx) => (
+              <Tab label={grade.category} key={idx} {...a11yProps(idx)} />
+            ))}
+        </Tabs>
+      </Box>
+
+      {grades &&
+        grades.map((grade, idx) => (
+          <TabPanel value={value} key={`${grade.category}-${idx}`} index={idx}>
+            {grade.options.map((option, idx) => (
+              <TableRow
+                key={`${option.grade}-${idx}`}
+                className={`${idx % 2 === 0 ? "tbl-odd" : "tbl-even"}`}
+              >
+                <TableCell>{option.grade}</TableCell>
+                <TableCell>{option.fees}</TableCell>
+                <TableCell>{option.seats}</TableCell>
+              </TableRow>
+            ))}
+          </TabPanel>
+        ))}
+    </Box>
+  );
 };
 
 export default Admission;
