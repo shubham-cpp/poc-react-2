@@ -7,7 +7,7 @@ interface option {
 }
 
 interface Grade {
-  catergory: string;
+  category: string;
   options: Array<option>;
 }
 const optionSchema = new Schema<option>({
@@ -17,7 +17,7 @@ const optionSchema = new Schema<option>({
 });
 
 const GradeSchema = new Schema<Grade>({
-  catergory: { type: String, required: true },
+  category: { type: String, required: true },
   options: [optionSchema],
 });
 
