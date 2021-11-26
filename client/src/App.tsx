@@ -25,7 +25,7 @@ function App(): ReactElement {
           <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
+      {/* <Footer /> */}
     </ThemeProvider>
   );
 }
