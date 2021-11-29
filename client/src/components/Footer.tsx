@@ -45,7 +45,7 @@ const Footer = (): ReactElement => {
   return (
     <>
       <footer className={classes.footer}>
-        Copyright &copy; 2020 Leaning Curve Public School
+        Copyright &copy; 2020 Learning Curve Public School
       </footer>
       <div className={classes.socials}>
         <span>
