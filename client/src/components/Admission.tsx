@@ -57,9 +57,9 @@ const Admission = (): ReactElement => {
     axios
       .get("/admissions")
       .then(({ data }) => dispatch(setAdmissionGrades(data)))
-      .catch((err) =>
-        console.error("Error while fetching grades ", err.message)
-      );
+      // .catch((err) =>
+      //   console.error("Error while fetching grades ", err.message)
+      // );
   }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) =>

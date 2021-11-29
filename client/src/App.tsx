@@ -7,7 +7,7 @@ import Admission from "./components/Admission";
 import Contact from "./components/Contact";
 import Header from "./components/Header";
 import Home from "./components/Home";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 
 const theme = createTheme();
 function App(): ReactElement {
@@ -16,7 +16,7 @@ function App(): ReactElement {
       <BrowserRouter>
         <Header />
         <Typography variant="h3" sx={{ textAlign: "center" }}>
-          Learning Curve Public School{" "}
+          Learning Curve Public School
         </Typography>
         <Routes>
           <Route path="/" element={<Home />} />
