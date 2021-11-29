@@ -30,3 +30,6 @@ jobs:
     - name: Run tests
       working-directory: client
       run: yarn run test
+    - name: Run build
+      working-directory: client
+      run: yarn run build
