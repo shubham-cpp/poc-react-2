@@ -1,16 +1,16 @@
-import { ReactElement, useState } from "react";
-import { Link } from "react-router-dom";
 import {
-  Box,
   AppBar,
-  Toolbar,
-  Typography,
+  Box,
   Button,
   Menu,
   MenuItem,
   Theme,
+  Toolbar,
+  Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { ReactElement, useState } from "react";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) => ({
   navlinks: {
@@ -64,7 +64,7 @@ const Header = (): ReactElement => {
               onClick={handleClick}
               color="inherit"
             >
-              <span className="material-icons">list</span>
+              <span className="material-icons" role="icon">list</span>
             </Button>
             <Menu
               id="basic-menu"
