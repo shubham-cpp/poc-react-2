@@ -121,10 +121,15 @@ describe("render tab layout", () => {
     const primBtn = screen.getByRole("tab", { name: "Primary", exact: true });
 
     fireEvent.click(primBtn);
-    expect(screen.getAllByRole("cell", { name: "70000" })[0]).toBeInTheDocument();
+    expect(
+      screen.getAllByRole("cell", { name: "70000" })[0]
+    ).toBeInTheDocument();
   });
   test("should render secondary tab", () => {
-    const secondaryBtn = screen.getByRole("tab", { name: "Secondary", exact: true });
+    const secondaryBtn = screen.getByRole("tab", {
+      name: "Secondary",
+      exact: true,
+    });
 
     fireEvent.click(secondaryBtn);
     expect(screen.getByRole("cell", { name: "85000" })).toBeInTheDocument();

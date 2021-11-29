@@ -64,7 +64,9 @@ const Header = (): ReactElement => {
               onClick={handleClick}
               color="inherit"
             >
-              <span className="material-icons" role="icon">list</span>
+              <span className="material-icons" role="icon">
+                list
+              </span>
             </Button>
             <Menu
               id="basic-menu"

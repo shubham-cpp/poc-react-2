@@ -23,6 +23,8 @@
     "test": "react-scripts test --watchAll=false",
     "test:wc": "react-scripts test --coverage",
     "eject": "react-scripts eject",
+    "format": "prettier -w --ignore-unknown .",
+    "lint": "eslint .",
     "start:dev": "react-app-rewired start",
     "build:dev": "react-app-rewired build",
     "test:dev": "react-app-rewired test"
