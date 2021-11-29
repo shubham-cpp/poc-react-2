@@ -2,10 +2,10 @@ import {
   Box,
   Tab,
   Table,
+  TableBody,
   TableCell,
   TableContainer,
   TableRow,
-  TableBody,
   Tabs,
 } from "@mui/material";
 import axios from "axios";
@@ -47,17 +47,6 @@ function a11yProps(index: number) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
-
-// interface option {
-//   grade: string;
-//   fees?: number;
-//   seats: number;
-// }
-
-// interface Grade {
-//   category: string;
-//   options: Array<option>;
-// }
 
 const Admission = (): ReactElement => {
   const [value, setValue] = useState(0);
