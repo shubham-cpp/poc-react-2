@@ -54,6 +54,9 @@ const Header = (): ReactElement => {
             <Button color="inherit">
               <Link to="/admission">Admission</Link>
             </Button>
+            <Button color="inherit">
+              <Link to="/images">Images</Link>
+            </Button>
           </div>
           <div className={classes.navBtn}>
             <Button
@@ -85,6 +88,9 @@ const Header = (): ReactElement => {
               </MenuItem>
               <MenuItem onClick={handleClose}>
                 <Link to="/admission">Admission</Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link to="/images">Images</Link>
               </MenuItem>
             </Menu>
           </div>

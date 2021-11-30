@@ -7,6 +7,7 @@ import Admission from "./components/Admission";
 import Contact from "./components/Contact";
 import Header from "./components/Header";
 import Home from "./components/Home";
+import { Images } from "./components/Images";
 // import Footer from "./components/Footer";
 
 const theme = createTheme();
@@ -23,6 +24,7 @@ function App(): ReactElement {
           <Route path="/contact" element={<Contact />} />
           <Route path="/admission" element={<Admission />} />
           <Route path="/about" element={<About />} />
+          <Route path="/images" element={<Images />} />
         </Routes>
       </BrowserRouter>
       {/* <Footer /> */}
