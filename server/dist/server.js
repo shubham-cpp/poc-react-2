@@ -31,7 +31,7 @@ const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
 (0, dotenv_1.config)();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 4001;
-const DB_URI = process.env.DB_URI || '';
+const DB_URI = process.env.DB_ONLINE || '';
 const options = {
     definition: {
         openapi: '3.0.0',
@@ -67,7 +67,7 @@ app.get('/*', (_, res) => {
     res.status(404).send('404 page not found');
 });
 (0, mongoose_1.connect)(DB_URI).then(() => {
-    console.log('Connected to database');
+    console.log('Connected to database(online)');
     try {
         app.listen(PORT, () => {
             console.log(`Connected successfully on port ${PORT}`);
