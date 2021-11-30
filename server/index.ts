@@ -1,12 +1,33 @@
-import express, { Application, Response } from 'express';
+import express, { Application } from 'express';
 import { connect } from 'mongoose';
 import { config } from 'dotenv';
 import cors from 'cors';
+import * as swaggerUI from 'swagger-ui-express';
+import swaggerJSDoc, * as swaggerJsDoc from 'swagger-jsdoc';
 
 config();
 const app: Application = express();
 const PORT = process.env.PORT || 4001;
 const DB_URI = process.env.DB_URI || '';
+
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Admission API',
+      version: '1.0.0',
+      description: 'An API to get info about school admission',
+    },
+    servers: [
+      {
+        url: 'http://localhost:' + PORT,
+      },
+    ],
+  },
+  apis: ['src\\routes\\*.ts'],
+};
+
+const specs = swaggerJSDoc(options)
 
 // Body parsing Middleware
 app.use(
@@ -26,14 +47,8 @@ app.use((_, res, next) => {
   next();
 });
 
-// app.get(
-//   '/',
-//   async (_, res: Response): Promise<Response> =>
-//     res.status(200).send({
-//       message: 'Hello World!',
-//     })
-// );
 app.use('/api/admissions', require('./src/routes/admission'));
+app.use('/api/docs',swaggerUI.serve,swaggerUI.setup(specs))
 
 // page not found
 app.get('/*', (_, res) => {
