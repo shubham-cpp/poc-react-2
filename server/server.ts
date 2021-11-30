@@ -8,7 +8,7 @@ import swaggerJSDoc, * as swaggerJsDoc from 'swagger-jsdoc';
 config();
 const app: Application = express();
 const PORT = process.env.PORT || 4001;
-const DB_URI = process.env.DB_URI || '';
+const DB_URI = process.env.DB_ONLINE || '';
 
 const options = {
   definition: {
@@ -56,7 +56,7 @@ app.get('/*', (_, res) => {
 });
 
 connect(DB_URI).then(() => {
-  console.log('Connected to database');
+  console.log('Connected to database(online)');
   try {
     app.listen(PORT, (): void => {
       console.log(`Connected successfully on port ${PORT}`);
