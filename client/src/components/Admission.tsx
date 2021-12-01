@@ -55,7 +55,7 @@ const Admission = (): ReactElement => {
 
   useEffect(() => {
     axios
-      .get("https://medale-poc-2-server.el.r.appspot.com/api/admissions")
+      .get("/admissions")
       .then(({ data }) => dispatch(setAdmissionGrades(data)))
       // .catch((err) =>
       //   console.error("Error while fetching grades ", err.message)
