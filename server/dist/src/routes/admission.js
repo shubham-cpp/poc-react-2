@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -63,15 +54,15 @@ const router = (0, express_1.Router)();
  *       500:
  *         description: Internal server error, Unable to fetch all data
  */
-router.route('/').get((_, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.route('/').get(async (_, res) => {
     try {
-        const admissions = yield admission_1.default.find({}, { _id: 0 });
+        const admissions = await admission_1.default.find({}, { _id: 0 });
         res.status(200).json(admissions);
     }
     catch (err) {
         res.status(500).send('Unable to fetch admission data from server');
     }
-}));
+});
 /**
  * @swagger
  * /api/admissions/{id}:
@@ -93,15 +84,15 @@ router.route('/').get((_, res) => __awaiter(void 0, void 0, void 0, function* ()
  *       404:
  *         description: The grade with id wasn't found
  */
-router.route('/:id').get((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.route('/:id').get(async (req, res) => {
     const { id } = req.params;
     try {
         // console.log(id);
-        const admission = yield admission_1.default.findById(id);
+        const admission = await admission_1.default.findById(id);
         res.status(200).json(admission);
     }
     catch (err) {
         res.status(404).send('Unable to find this particular admission data ');
     }
-}));
+});
 module.exports = router;
