@@ -6,6 +6,8 @@ import {
   TableCell,
   TableContainer,
   TableRow,
+  Alert,
+  AlertTitle,
   Tabs,
 } from "@mui/material";
 import axios from "axios";
@@ -50,21 +52,34 @@ function a11yProps(index: number) {
 
 const Admission = (): ReactElement => {
   const [value, setValue] = useState(0);
+  const [errors, setErrors] = useState<string[]>([]);
   const grades = useSelector((state: RootState) => state.admission.value);
   const dispatch = useDispatch();
 
   useEffect(() => {
     axios
-      .get("/admissions")
+      .get("https://api-dot-medale-poc-2.el.r.appspot.com/api/admissions")
       .then(({ data }) => dispatch(setAdmissionGrades(data)))
-      // .catch((err) =>
-      //   console.error("Error while fetching grades ", err.message)
-      // );
+      .catch((err) =>
+        setErrors([
+          "Unable to fetch data from server",
+          "Please refresh the page to maybe fix this issue",
+          err.message,
+        ])
+      );
   }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) =>
     setValue(newValue);
 
+  if (errors.length)
+    return (
+      <Alert severity="warning">
+        <AlertTitle>{errors[0]}</AlertTitle>
+        <p>{errors[1]}</p>
+        <p>{errors[2]}</p>
+      </Alert>
+    );
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
