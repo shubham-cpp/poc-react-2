@@ -4,6 +4,8 @@ import { config } from 'dotenv';
 import cors from 'cors';
 import * as swaggerUI from 'swagger-ui-express';
 import swaggerJSDoc, * as swaggerJsDoc from 'swagger-jsdoc';
+import YAML from 'yamljs'
+
 
 config();
 const app: Application = express();
@@ -27,7 +29,8 @@ const options = {
   apis: ['src\\routes\\*.ts'],
 };
 
-const specs = swaggerJSDoc(options)
+// const specs = swaggerJSDoc(options)  // YAML.load('src/misc/api-info.yaml')
+const specs = YAML.load('api-info.yaml')
 
 // Body parsing Middleware
 app.use(
@@ -39,7 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use((_, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
@@ -61,6 +64,7 @@ connect(DB_URI).then(() => {
     app.listen(PORT, (): void => {
       console.log(`Connected successfully on port ${PORT}`);
     });
+// console.log(YAML.load('src/misc/api-info.yaml'))
   } catch (error: any) {
     console.error(`Error occured: ${error.message}`);
   }

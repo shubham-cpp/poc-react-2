@@ -79,7 +79,7 @@ router.route('/').get(async (_, res) => {
  *     responses:
  *       200:
  *         description: The whole information about specific grade
- *         contens:
+ *         contents:
  *           application/json:
  *       404:
  *         description: The grade with id wasn't found

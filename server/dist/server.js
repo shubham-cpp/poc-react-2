@@ -27,7 +27,7 @@ const mongoose_1 = require("mongoose");
 const dotenv_1 = require("dotenv");
 const cors_1 = __importDefault(require("cors"));
 const swaggerUI = __importStar(require("swagger-ui-express"));
-const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
+const yamljs_1 = __importDefault(require("yamljs"));
 (0, dotenv_1.config)();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 4001;
@@ -48,7 +48,8 @@ const options = {
     },
     apis: ['src\\routes\\*.ts'],
 };
-const specs = (0, swagger_jsdoc_1.default)(options);
+// const specs = swaggerJSDoc(options)  // YAML.load('src/misc/api-info.yaml')
+const specs = yamljs_1.default.load('api-info.yaml');
 // Body parsing Middleware
 app.use((0, cors_1.default)({
     origin: '*',
@@ -56,7 +57,7 @@ app.use((0, cors_1.default)({
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((_, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
@@ -72,6 +73,7 @@ app.get('/*', (_, res) => {
         app.listen(PORT, () => {
             console.log(`Connected successfully on port ${PORT}`);
         });
+        // console.log(YAML.load('src/misc/api-info.yaml'))
     }
     catch (error) {
         console.error(`Error occured: ${error.message}`);

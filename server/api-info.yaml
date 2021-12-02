@@ -1,0 +1,120 @@
+openapi: "3.0.0"
+info:
+  title: Admission API
+  version: 1.0
+  description: 'An API to get info about school admission'
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+  servers:
+    - url: 'http://localhost:4000'
+      description: 'Laptop localhost'
+    - url: 'https://medale-poc-2.el.r.appspot.com/'
+      description: 'Gcloud instance'
+    - url: 'https://react-poc2.azurewebsites.net/'
+      description: 'Azure cloud instance'
+
+schemes:
+  - http
+  - https
+
+components:
+  schemas:
+    Grades:
+      type: object
+      # required:
+      #   - category
+      #   - options
+      properties:
+        _id:
+          type: string
+          description: The auto-generated id of Admission
+        category:
+          type: string
+          # enum: ['pre-primary','primary','secondary']
+          description: Name of the grade(General)
+        options:
+          type: array
+          description: Array of info about the category
+          items:
+            $ref: '#/components/schemas/Option'
+      example:
+        _id: 61a5afcae10876db1c98
+        category: Pre-primary
+        options:
+          - grade: Nursery
+            fees: 50000
+            seats: 50
+
+    Option:
+      type: object
+      required:
+        - grade
+        - seats
+      properties:
+        _id:
+          type: string
+          description: The auto-generated id by mongodb
+        grade:
+          type: string
+          description: Name of the grade(standard)
+        fees:
+          type: number
+          description: The fees of the grade
+        seats:
+          type: number
+          description: No. of available seats for this grade
+      example:
+        _id: 687aszxvh213798xczxf
+        grade: Nursery
+        fees: 50000
+        seats: 50
+
+paths:
+  /api/admissions:
+    get:
+      summary: Array of admission types
+      description: This will return a json array of all the admission details we have in our database
+      tags:
+        - Grades
+      responses:
+        '200':
+          description: Array of admission type
+          content:
+            "application/json":
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grades'
+        '500':
+          description: Unable to fetch data from mongodb(database)
+  /api/admissions/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            required: true
+            description: The id of grade
+      summary: Array of admission types
+      description: This will return a json array of all the admission details we have in our database
+      tags:
+        - Grades
+      responses:
+        '200':
+          description: Particular admission details
+          content:
+            application/json:
+              schema:
+                # type: object
+                # items:
+                $ref: '#/components/schemas/Grades'
+
+        '404':
+          description: Unable to find particular data with this _id
+
+
+tags:
+  - name: Grades
+    description: 'An api for getting grades'
