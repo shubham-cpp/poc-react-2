@@ -61,7 +61,7 @@ const ImagesData = [
   },
 ];
 
-export const Images = (): ReactElement => {
+const Images = (): ReactElement => {
   return (
     <Container>
       {ImageData &&
@@ -71,3 +71,5 @@ export const Images = (): ReactElement => {
     </Container>
   );
 };
+
+export default Images;
