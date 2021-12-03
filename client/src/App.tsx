@@ -1,19 +1,22 @@
+import { CssBaseline, Typography } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
 import { ReactElement } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Typography } from "@mui/material";
-import About from "./components/About";
-import Admission from "./components/Admission";
-import Contact from "./components/Contact";
-import Header from "./components/Header";
-import Home from "./components/Home";
-import { Images } from "./components/Images";
-// import Footer from "./components/Footer";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  About,
+  Admission,
+  Contact,
+  Footer,
+  Header,
+  Home,
+  Images,
+} from "./components";
+import themes from "./misc/theme";
 
-const theme = createTheme();
 function App(): ReactElement {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themes}>
+      <CssBaseline />
       <BrowserRouter>
         <Header />
         <Typography variant="h3" sx={{ textAlign: "center" }}>
@@ -27,7 +30,7 @@ function App(): ReactElement {
           <Route path="/images" element={<Images />} />
         </Routes>
       </BrowserRouter>
-      {/* <Footer /> */}
+      <Footer />
     </ThemeProvider>
   );
 }
