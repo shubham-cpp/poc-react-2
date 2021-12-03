@@ -74,7 +74,7 @@ const Admission = (): ReactElement => {
 
   if (errors.length)
     return (
-      <Alert severity="warning">
+      <Alert severity="warning" sx={{ margin: "4rem" }}>
         <AlertTitle>{errors[0]}</AlertTitle>
         <p>{errors[1]}</p>
         <p>{errors[2]}</p>
