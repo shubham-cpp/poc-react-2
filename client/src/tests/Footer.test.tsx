@@ -12,5 +12,5 @@ function MockFooter() {
 
 test("should render footer text", () => {
   const { getByText } = render(<MockFooter />);
-  getByText(/2020 Learning Curve/im);
+  getByText(/Learning Curve Public School /im);
 });
