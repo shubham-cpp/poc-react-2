@@ -1,55 +1,30 @@
 import { ReactElement } from "react";
-import { Box, Stack, Typography, Theme } from "@mui/material";
-
-import { makeStyles } from "@mui/styles";
-
-const useStyles = makeStyles((theme: Theme) => ({
-  gridbox: {
-    "& h4": {
-      marginBottom: 4,
-      color: theme.palette.primary.main,
-    },
-    "& h6": {
-      marginTop: theme.spacing(0.5),
-    },
-  },
-}));
 
 const Contact = (): ReactElement => {
-  const classes = useStyles();
   return (
-    <Box className={classes.gridbox} sx={{ flexGrow: 1, marginTop: "3vh" }}>
-      <Stack
-        direction={{ xs: "column", sm: "column", md: "row" }}
-        justifyContent="space-evenly"
-        alignItems="flex-start"
-        spacing={{ xs: 2, sm: 3, md: 5 }}
-      >
-        <div>
-          <Typography variant="h4">Phone</Typography>
-          <Typography variant="h6">Pre-Primary School</Typography>
-          <Typography variant="subtitle1">+91 95031 41559</Typography>
-          <Typography variant="h6">Primary & Secondary School</Typography>
-          <Typography variant="subtitle1">+91 95031 41560</Typography>
+    <div className="container-lg mt-5">
+      <div className="row justify-content-between">
+        <div className="col-sm-12 col-md-4 ">
+          <h1 className="fs-1 fw-bold text-warning">Phone</h1>
+          <p className="fs-5" role="para">Pre-Primary School</p>
+          <p className="fs-5" role="para">+91 95031 41559</p>
+          <p className="fs-5" role="para">Primary & Secondary School</p>
+          <p className="fs-5" role="para">+91 95031 41560</p>
         </div>
-        <div>
-          <Typography variant="h4">Email</Typography>
-          <Typography variant="h6">Pre-Primary School</Typography>
-          <Typography variant="subtitle1">
-            kps.preprimary@learningcurve.com
-          </Typography>
-          <Typography variant="h6">Primary & Secondary School</Typography>
-          <Typography variant="subtitle1">
-            kps.primarysec@learningcurve.com
-          </Typography>
+        <div className="col-sm-12 col-md-4 ">
+          <h1 className="fs-1 fw-bold text-warning">Email</h1>
+          <p className="fs-5" role="para">Pre-Primary School</p>
+          <p className="fs-5" role="para"> kps.preprimary@learningcurve.com </p>
+          <p className="fs-5" role="para">Primary & Secondary School</p>
+          <p className="fs-5" role="para"> kps.primarysec@learningcurve.com </p>
         </div>
-        <div>
-          <Typography variant="h4">Location</Typography>
-          <Typography variant="h6">Near Hotel Lemon Tree, Pune</Typography>
-          <Typography variant="h6">Maharashtra</Typography>
+        <div className="col-sm-12 col-md-4 ">
+          <h1 className="fs-1 fw-bold text-warning">Location</h1>
+          <p className="fs-5" >Near Hotel Lemon Tree, Pune</p>
+          <p className="fs-5" role="para">Maharashtra</p>
         </div>
-      </Stack>
-    </Box>
+      </div>
+    </div>
   );
 };
 
