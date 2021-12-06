@@ -13,5 +13,5 @@ const MockApp = () => {
 
 test("should render h3", () => {
   const { getByRole } = render(<MockApp />);
-  getByRole("heading", { name: /Learning Curve Public School/im });
+  getByRole("heading", { name: "Learning Curve Public School",exact:true });
 });

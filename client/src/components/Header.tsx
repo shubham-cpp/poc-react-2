@@ -1,102 +1,36 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  Menu,
-  MenuItem,
-  Theme,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { ReactElement, useState } from "react";
-import { Link } from "react-router-dom";
-
-const useStyles = makeStyles((theme: Theme) => ({
-  navlinks: {
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
-    },
-  },
-  navBtn: {
-    color: "white",
-    display: "inline",
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
-}));
+import { ReactElement } from "react";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import { Link as RouterLink } from "react-router-dom";
 
 const Header = (): ReactElement => {
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "#ff3d00" }}>
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link to="/">Home</Link>
-          </Typography>
-          <div className={classes.navlinks}>
-            <Button color="inherit">
-              <Link to="/contact">Contact</Link>
-            </Button>
-            <Button color="inherit">
-              <Link to="/about">About US</Link>
-            </Button>
-            <Button color="inherit">
-              <Link to="/admission">Admission</Link>
-            </Button>
-            <Button color="inherit">
-              <Link to="/images">Images</Link>
-            </Button>
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Container>
+        <Navbar.Brand as={RouterLink} to="/" className="mr-auto">
+          Home
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <div className="me-auto">
+            {/*Some empty div to push link to right */}
           </div>
-          <div className={classes.navBtn}>
-            <Button
-              id="basic-button"
-              aria-controls="basic-menu"
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-              color="inherit"
-            >
-              <span className="material-icons" role="icon">
-                list
-              </span>
-            </Button>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
-              }}
-            >
-              <MenuItem onClick={handleClose}>
-                <Link to="/about">About</Link>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Link to="/contact">Contact</Link>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Link to="/admission">Admission</Link>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Link to="/images">Images</Link>
-              </MenuItem>
-            </Menu>
-          </div>
-        </Toolbar>
-      </AppBar>
-    </Box>
+          <Nav className="some">
+            <Nav.Link as={RouterLink} to="/contact">
+              Contact
+            </Nav.Link>
+            <Nav.Link as={RouterLink} to="/about">
+              About
+            </Nav.Link>
+            <Nav.Link as={RouterLink} to="/admission">
+              Admission
+            </Nav.Link>
+            <Nav.Link as={RouterLink} to="/images">
+              Images
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 

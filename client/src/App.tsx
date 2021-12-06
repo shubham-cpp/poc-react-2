@@ -1,5 +1,4 @@
-import { CssBaseline, Typography } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { ReactElement } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
@@ -11,17 +10,13 @@ import {
   Home,
   Images,
 } from "./components";
-import themes from "./misc/theme";
 
 function App(): ReactElement {
   return (
-    <ThemeProvider theme={themes}>
-      <CssBaseline />
+    <>
       <BrowserRouter>
         <Header />
-        <Typography variant="h3" sx={{ textAlign: "center" }}>
-          Learning Curve Public School
-        </Typography>
+        <h1 className="text-center heading">Learning Curve Public School</h1>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
@@ -31,7 +26,7 @@ function App(): ReactElement {
         </Routes>
       </BrowserRouter>
       <Footer />
-    </ThemeProvider>
+    </>
   );
 }
 

@@ -1,16 +1,6 @@
-import { Container, Theme } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Image, Col, Row } from "react-bootstrap";
 import { ReactElement } from "react";
 import LazyLoad from "react-lazyload";
-
-const useStyles = makeStyles((theme: Theme) => ({
-  imgs: {
-    height: theme.spacing(35),
-    width: theme.spacing(35),
-    maxHeight: theme.spacing(40),
-    maxWidth: theme.spacing(40),
-  },
-}));
 
 interface LazyImgProps {
   src: string;
@@ -18,11 +8,12 @@ interface LazyImgProps {
 }
 
 const LazyImg = ({ src, altText }: LazyImgProps): ReactElement => {
-  const classes = useStyles();
   return (
-    <LazyLoad throttle={200}>
-      <img className={classes.imgs} src={src} alt={altText} />
-    </LazyLoad>
+    <Col xs={6} md={4}>
+      <LazyLoad throttle={200}>
+        <Image className="lazg-img" src={src} alt={altText} thumbnail />
+      </LazyLoad>
+    </Col>
   );
 };
 
@@ -63,12 +54,14 @@ const ImagesData = [
 
 const Images = (): ReactElement => {
   return (
-    <Container>
-      {ImageData &&
-        ImagesData.map((img, idx) => (
-          <LazyImg key={idx} src={img.src} altText={img.altText} />
-        ))}
-    </Container>
+    <div className="container">
+      <Row>
+        {ImageData &&
+          ImagesData.map((img, idx) => (
+            <LazyImg key={idx} src={img.src} altText={img.altText} />
+          ))}
+      </Row>
+    </div>
   );
 };
 
