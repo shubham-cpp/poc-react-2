@@ -23,11 +23,11 @@ export const admissionSlice = createSlice({
     setAdmissionGrades: (state, action: PayloadAction<Grade[]>) => {
       state.value = action.payload;
     },
-    addAdmissionGrade: (state, action: PayloadAction<Grade>) => {
-      state.value.push(action.payload);
-    },
+    // addAdmissionGrade: (state, action: PayloadAction<Grade>) => {
+    //   state.value.push(action.payload);
+    // },
   },
 });
 
-export const { setAdmissionGrades, addAdmissionGrade } = admissionSlice.actions;
+export const { setAdmissionGrades } = admissionSlice.actions;
 export default admissionSlice.reducer;
