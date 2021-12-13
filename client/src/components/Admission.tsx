@@ -37,7 +37,7 @@ const Admission = (): ReactElement => {
     <BTabs
       id="controlled-tab-example"
       activeKey={key}
-      onSelect={(k, e) => setKey(k ?? grades[0].category ?? "Primary")}
+      onSelect={(k) => setKey(k ?? grades[0].category ?? "Primary")}
       className="mb-3"
     >
       {grades &&
