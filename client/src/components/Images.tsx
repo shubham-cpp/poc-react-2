@@ -17,7 +17,7 @@ const LazyImg = ({ src, altText }: LazyImgProps): ReactElement => {
   );
 };
 
-const ImagesData = [
+export const ImagesData = [
   {
     src: "https://www.collinsdictionary.com/images/thumb/school_309241295_250.jpg?version=4.0.200",
     altText: "Class asking questions",
@@ -56,7 +56,7 @@ const Images = (): ReactElement => {
   return (
     <div className="container">
       <Row>
-        {ImageData &&
+        {ImagesData &&
           ImagesData.map((img, idx) => (
             <LazyImg key={idx} src={img.src} altText={img.altText} />
           ))}
