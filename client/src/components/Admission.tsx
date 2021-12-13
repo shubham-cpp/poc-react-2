@@ -34,42 +34,52 @@ const Admission = (): ReactElement => {
     );
 
   return (
-    <BTabs
-      id="controlled-tab-example"
-      activeKey={key}
-      onSelect={(k) => setKey(k ?? grades[0].category ?? "Primary")}
-      className="mb-3"
-    >
-      {grades &&
-        grades.map((grade, idx) => (
-          <BTab
-            eventKey={grade.category}
-            key={`${grade.category}-${idx}`}
-            title={grade.category}
-          >
-            <BTable striped bordered hover>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Grade</th>
-                  <th>Fees</th>
-                  <th>Seats</th>
-                </tr>
-              </thead>
-              <tbody>
-                {grade.options.map((option, idx) => (
-                  <tr key={`${option.grade}-${option.seats}-${idx}`}>
-                    <td>{idx + 1}</td>
-                    <td>{option.grade}</td>
-                    <td>{option.fees}</td>
-                    <td>{option.seats}</td>
+    <>
+      <style type="text/css">
+        {`
+      .nav-tabs,.nav-pills{
+        background-color:#323539;
+      }
+      `}
+      </style>
+      <BTabs
+        id="controlled-tab-example"
+        activeKey={key}
+        onSelect={(k) => setKey(k ?? grades[0].category ?? "Primary")}
+        className="mb-3 p-2"
+        variant="pills"
+      >
+        {grades &&
+          grades.map((grade, idx) => (
+            <BTab
+              eventKey={grade.category}
+              key={`${grade.category}-${idx}`}
+              title={grade.category}
+            >
+              <BTable striped bordered hover variant="dark">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Grade</th>
+                    <th>Fees</th>
+                    <th>Seats</th>
                   </tr>
-                ))}
-              </tbody>
-            </BTable>
-          </BTab>
-        ))}
-    </BTabs>
+                </thead>
+                <tbody>
+                  {grade.options.map((option, idx) => (
+                    <tr key={`${option.grade}-${option.seats}-${idx}`}>
+                      <td>{idx + 1}</td>
+                      <td>{option.grade}</td>
+                      <td>{option.fees}</td>
+                      <td>{option.seats}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </BTable>
+            </BTab>
+          ))}
+      </BTabs>
+    </>
   );
 };
 
