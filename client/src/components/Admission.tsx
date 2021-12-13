@@ -1,58 +1,13 @@
-import {
-  Box,
-  Tab,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Alert,
-  AlertTitle,
-  Tabs,
-} from "@mui/material";
 import axios from "axios";
 import { ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app/store";
+import { Tabs as BTabs, Tab as BTab, Table as BTable } from "react-bootstrap";
 import { setAdmissionGrades } from "../features/Admission/admissionSlice";
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <TableContainer sx={{ p: 3, maxWidth: "20rem" }}>
-          <Table>
-            <TableBody>{children}</TableBody>
-          </Table>
-        </TableContainer>
-      )}
-    </div>
-  );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
 
 const Admission = (): ReactElement => {
-  const [value, setValue] = useState(0);
   const [errors, setErrors] = useState<string[]>([]);
+  const [key, setKey] = useState("Primary");
   const grades = useSelector((state: RootState) => state.admission.value);
   const dispatch = useDispatch();
 
@@ -69,48 +24,52 @@ const Admission = (): ReactElement => {
       );
   }, []);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) =>
-    setValue(newValue);
-
   if (errors.length)
     return (
-      <Alert severity="warning" sx={{ margin: "4rem" }}>
-        <AlertTitle>{errors[0]}</AlertTitle>
+      <div className="container-md justify-content-center">
+        <h1 className="fs-3 fw-bolder text-warning">{errors[0]}</h1>
         <p>{errors[1]}</p>
         <p>{errors[2]}</p>
-      </Alert>
+      </div>
     );
-  return (
-    <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
-          {grades &&
-            grades.map((grade, idx) => (
-              <Tab label={grade.category} key={idx} {...a11yProps(idx)} />
-            ))}
-        </Tabs>
-      </Box>
 
+  return (
+    <BTabs
+      id="controlled-tab-example"
+      activeKey={key}
+      onSelect={(k, e) => setKey(k ?? grades[0].category ?? "Primary")}
+      className="mb-3"
+    >
       {grades &&
         grades.map((grade, idx) => (
-          <TabPanel value={value} key={`${grade.category}-${idx}`} index={idx}>
-            {grade.options.map((option, idx) => (
-              <TableRow
-                key={`${option.grade}-${idx}`}
-                className={`${idx % 2 === 0 ? "tbl-odd" : "tbl-even"}`}
-              >
-                <TableCell>{option.grade}</TableCell>
-                <TableCell>{option.fees}</TableCell>
-                <TableCell>{option.seats}</TableCell>
-              </TableRow>
-            ))}
-          </TabPanel>
+          <BTab
+            eventKey={grade.category}
+            key={`${grade.category}-${idx}`}
+            title={grade.category}
+          >
+            <BTable striped bordered hover>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Grade</th>
+                  <th>Fees</th>
+                  <th>Seats</th>
+                </tr>
+              </thead>
+              <tbody>
+                {grade.options.map((option, idx) => (
+                  <tr key={`${option.grade}-${option.seats}-${idx}`}>
+                    <td>{idx + 1}</td>
+                    <td>{option.grade}</td>
+                    <td>{option.fees}</td>
+                    <td>{option.seats}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </BTable>
+          </BTab>
         ))}
-    </Box>
+    </BTabs>
   );
 };
 

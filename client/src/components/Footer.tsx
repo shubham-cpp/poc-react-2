@@ -1,4 +1,3 @@
-import { Box, Typography } from "@mui/material";
 import { ReactElement } from "react";
 import {
   AiFillFacebook,
@@ -6,27 +5,10 @@ import {
   AiFillTwitterSquare,
 } from "react-icons/ai";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {"Copyright © "}
-      Learning Curve Public School {"  "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 const Footer = (): ReactElement => {
   return (
-    <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
-      <Typography
-        variant="subtitle1"
-        align="center"
-        color="text.secondary"
-        component="p"
-        gutterBottom
-      >
+    <footer className="fixed-md-bottom sticky-sm-bottom">
+      <p className="text-center">
         <span>
           <AiFillFacebook />{" "}
         </span>
@@ -36,9 +18,14 @@ const Footer = (): ReactElement => {
         <span>
           <AiFillTwitterSquare />{" "}
         </span>
-      </Typography>
-      <Copyright />
-    </Box>
+      </p>
+      <h1 className="fs-6 text-center">
+        {"Copyright © "}
+        Learning Curve Public School {"  "}
+        {new Date().getFullYear()}
+        {"."}
+      </h1>
+    </footer>
   );
 };
 

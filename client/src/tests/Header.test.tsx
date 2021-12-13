@@ -1,25 +1,18 @@
-import { createTheme, ThemeProvider } from "@mui/material";
-import { cleanup, render, screen, fireEvent } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import About from "../components/About";
-import Admission from "../components/Admission";
-import Contact from "../components/Contact";
-import Header from "../components/Header";
-import Home from "../components/Home";
+import { About, Admission, Contact, Header, Home } from "../components";
 
 function MockHeader() {
   return (
-    <ThemeProvider theme={createTheme()}>
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/admission" element={<Admission />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/admission" element={<Admission />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
@@ -35,7 +28,7 @@ describe("renders all links", () => {
     screen.getByRole("link", { name: /Contact/ });
   });
   test("should render about link", () => {
-    screen.getByRole("link", { name: /About us/i });
+    screen.getByRole("link", { name: /About/i });
   });
   test("should render admission link", () => {
     screen.getByRole("link", { name: /Admission/ });
@@ -54,11 +47,13 @@ describe("test mobile version for navbar", () => {
   });
   afterEach(cleanup);
   test("should render nav button", () => {
-    expect(screen.getByRole("icon")).toBeInTheDocument();
+    // expect(screen.getByRole("icon")).toBeInTheDocument();
+    // expect(screen.getByRole("icon")).toBeInTheDocument();
+    screen.getByLabelText("Toggle navigation");
   });
   describe("clicking nav button should render", () => {
     beforeEach(() => {
-      const navBtn = screen.getByRole("icon");
+      const navBtn = screen.getByLabelText("Toggle navigation");
       fireEvent.click(navBtn);
     });
     test("about link", () => {
