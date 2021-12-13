@@ -1,4 +1,10 @@
-import { cleanup, render, screen, fireEvent } from "@testing-library/react";
+import {
+  cleanup,
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+} from "@testing-library/react";
 import axios from "axios";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
@@ -133,5 +139,20 @@ describe("render tab layout", () => {
 
     fireEvent.click(secondaryBtn);
     expect(screen.getByRole("cell", { name: "85000" })).toBeInTheDocument();
+  });
+});
+describe("Api returns errors", () => {
+  afterEach(cleanup);
+  test("should render errors", () => {
+    mockedAxios.get.mockRejectedValueOnce({ message: "Server is down" });
+    render(<MockAdmission />);
+    waitFor(() => {
+      expect(
+        screen.getByRole("heading", {
+          name: "Unable to fetch data from server",
+        })
+      ).toBeInTheDocument();
+      expect(screen.getByText(/server is down/i)).toBeInTheDocument();
+    });
   });
 });
