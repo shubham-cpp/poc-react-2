@@ -5,28 +5,14 @@ import { Link as RouterLink } from "react-router-dom";
 const Header = (): ReactElement => {
   return (
     <>
-      {/* <style type="text/css"> */}
-      {/*   {` */}
-      {/*       .navbar{ */}
-      {/*       background-color: #1fa5ff; */}
-      {/*       } */}
-      {/*       .nav-link{ */}
-      {/*           color: black; */}
-      {/*       } */}
-      {/*       .nav-link:hover{ */}
-      {/*          font-size: 2rem; */}
-      {/*       } */}
-      {/*       .navbar-toggler{ */}
-      {/*           background-color:#52bf99; */}
-      {/*           color:red; */}
-      {/*       } */}
-      {/*   `} */}
-      {/* </style> */}
-
       <div className="bg"></div>
       <div className="bg bg2"></div>
       <div className="bg bg3"></div>
-      <Navbar collapseOnSelect expand="lg" className="border-bottom border-primary rounded shadow">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        className="border-bottom border-primary rounded shadow"
+      >
         <Container>
           <Navbar.Brand as={RouterLink} to="/" className="mr-auto">
             Home
