@@ -5,31 +5,31 @@ name: Lint and test code
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 defaults:
   run:
     working-directory: client
 jobs:
   lint-test:
-
-    runs-on: ubuntu-latest
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-#     defaults:
-#       run:
-#         working-directory: ./client
+    runs-on:
+      ubuntu-latest
+      # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    #     defaults:
+    #       run:
+    #         working-directory: ./client
     steps:
-    - uses: actions/checkout@v2
-    - name: Install packages(using ci)
-      working-directory: client
-      run: yarn install --frozen-lockfile
-    - name: Run lint
-      working-directory: client
-      run: yarn run lint
-    - name: Run tests
-      working-directory: client
-      run: yarn run test
-    - name: Run build
-      working-directory: client
-      run: yarn run build
+      - uses: actions/checkout@v2
+      - name: Install packages(using ci)
+        working-directory: client
+        run: npm ci
+      - name: Run lint
+        working-directory: client
+        run: npm run lint
+      - name: Run tests
+        working-directory: client
+        run: npm run test
+      - name: Run build
+        working-directory: client
+        run: npm run build
