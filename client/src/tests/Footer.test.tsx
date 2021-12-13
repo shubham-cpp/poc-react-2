@@ -1,13 +1,8 @@
-import { createTheme, ThemeProvider } from "@mui/material";
 import { render } from "@testing-library/react";
 import Footer from "../components/Footer";
 
 function MockFooter() {
-  return (
-    <ThemeProvider theme={createTheme()}>
-      <Footer />
-    </ThemeProvider>
-  );
+  return <Footer />;
 }
 
 test("should render footer text", () => {
