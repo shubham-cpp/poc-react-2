@@ -17,7 +17,12 @@ const ScrollTopBtn = () => {
     window.scrollTo(0, 0);
   };
   return (
-    <button className=" scroll-btn d-block d-sm-none" onClick={toTop}>
+    <button
+      className=" scroll-btn d-block d-sm-none"
+      onClick={toTop}
+      aria-label="scrollTopBtn"
+      aria-describedby="Scroll to top"
+    >
       <BsFillCaretUpSquareFill />
     </button>
   );
